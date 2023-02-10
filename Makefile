@@ -31,10 +31,10 @@ docker-build:
 	docker build . -t $(FULL_VERSION) && docker tag $(FULL_VERSION) $(BIN_NAME):latest && docker tag $(FULL_VERSION) $(BIN_NAME_ALIAS):latest && docker tag $(FULL_VERSION) $(BIN_NAME_ALIAS):$(VERSION)
 
 docker-push:
-	docker push $(FULL_VERSION_ALIAS) && docker push $(FULL_VERSION):latest
+	docker push $(FULL_VERSION_ALIAS) && docker push $(BIN_NAME_ALIAS):latest
 
 docker-pull:
-	docker pull $(FULL_VERSION_ALIAS) && docker pull $(FULL_VERSION):latest
+	docker pull $(FULL_VERSION_ALIAS) && docker pull $(BIN_NAME_ALIAS):latest
 
 docker-test:
 	docker run --rm -it $(FULL_VERSION_ALIAS):latest bash
