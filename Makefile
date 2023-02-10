@@ -36,13 +36,13 @@ docker-push:
 docker-pull:
 	docker pull $(FULL_VERSION_ALIAS) && docker pull $(BIN_NAME_ALIAS):latest
 
-test: docker-test-gpu
+test: test-gpu
 
-docker-test-gpu:
+test-gpu:
 	docker run --rm --gpus all -it $(BIN_NAME_ALIAS):latest bash
 
-docker-test-cpu:
-	docker run --rm --gpus all -it $(BIN_NAME_ALIAS):latest bash
+test-cpu:
+	docker run --rm -it $(BIN_NAME_ALIAS):latest bash
 
 
 docker: docker-build docker-save docker-push
