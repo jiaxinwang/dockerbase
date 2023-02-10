@@ -60,10 +60,11 @@ BIN_NAME_ALIAS=registry.cn-beijing.aliyuncs.com/showmethemoney/damobase
 
 这里，定义你的产品名称，同时也是 docker 仓库名称，因为我想将镜像同时推给 docker hub 和 阿里 registry，所以我定义了一个别名，大伙可以根据需求自行修改
 
-然后，给仓库打个 tag
+然后，看看仓库有什么 tag，再给仓库打个不一样的 tag
 
 ```
-git tag v0.0.1
+git tag
+git tag {不一样的tag}
 ```
 
 ```
@@ -78,7 +79,7 @@ FULL_VERSION_ALIAS := $(BIN_NAME_ALIAS):$(VERSION)
 这里会从 git 拿一些数据，如果你所有的改动都提交了，这里会定义镜像的 tag 为：
 
 ```
-registry.cn-beijing.aliyuncs.com/showmethemoney/damobase:v0.0.1-{这个git仓库的总commit次数}-{最后一次commit的hash数}
+registry.cn-beijing.aliyuncs.com/showmethemoney/damobase:{不一样的tag}-{这个git仓库的总commit次数}-{最后一次commit的hash数}
 ```
 
 如：
