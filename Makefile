@@ -36,13 +36,17 @@ docker-push:
 docker-pull:
 	docker pull $(FULL_VERSION_ALIAS) && docker pull $(BIN_NAME_ALIAS):latest
 
-docker-test:
-	docker run --rm -it $(FULL_VERSION_ALIAS):latest bash
+test: docker-test-gpu
+
+docker-test-gpu:
+	docker run --rm --gpus all -it $(BIN_NAME_ALIAS):latest bash
+
+docker-test-cpu:
+	docker run --rm --gpus all -it $(BIN_NAME_ALIAS):latest bash
+
 
 docker: docker-build docker-save docker-push
 
 clean:
 	@test ! -e bin/${BIN_NAME} || rm bin/${BIN_NAME}
 
-test:
-	go test ./...
