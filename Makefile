@@ -34,7 +34,7 @@ docker-push:
 	docker push $(FULL_VERSION_ALIAS) && docker push $(FULL_VERSION_ALIAS):latest
 
 docker-pull:
-	docker pull $(FULL_VERSION_ALIAS) && docker push $(FULL_VERSION_ALIAS):latest
+	docker pull $(FULL_VERSION_ALIAS) && docker pull $(FULL_VERSION_ALIAS):latest
 
 docker-test:
 	docker run --rm -it $(FULL_VERSION_ALIAS):latest bash
