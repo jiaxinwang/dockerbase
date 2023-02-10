@@ -1,10 +1,10 @@
 .PHONY: build build-alpine clean test help default
 
-BIN_NAME=wangjiaxin/ubuntu20.04-cuda11.3.0-py37-torch1.11.0-tf1.15.5-1.0.2
+BIN_NAME=wangjiaxin/ubuntu20.04-cuda11.3.0-py37-torch1.11.0-tf1.15.5
 GIT_TAG := $(shell git describe --abbrev=0 --tags 2>/dev/null || echo 0.0.0)
 GIT_COMMIT_SEQ := $(shell git rev-parse --short HEAD)
 GIT_COMMIT_CNT := $(shell git rev-list --all --count)
-VERSION := $(GIT_TAG).$(GIT_COMMIT_CNT).$(GIT_COMMIT_SEQ)
+VERSION := $(GIT_TAG)-$(GIT_COMMIT_CNT)-$(GIT_COMMIT_SEQ)
 FULL_VERSION := $(BIN_NAME):$(VERSION)
 
 default: test
