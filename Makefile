@@ -37,7 +37,7 @@ docker-pull:
 	docker pull $(FULL_VERSION_ALIAS) && docker push $(FULL_VERSION_ALIAS):latest
 
 docker-test:
-	docker run --rmit $(FULL_VERSION_ALIAS) bash
+	docker run --rm -it $(FULL_VERSION_ALIAS):latest bash
 
 docker: docker-build docker-save docker-push
 
