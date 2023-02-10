@@ -1,11 +1,13 @@
 .PHONY: build build-alpine clean test help default
 
 BIN_NAME=wangjiaxin/ubuntu20.04-cuda11.3.0-py37-torch1.11.0-tf1.15.5
+BIN_NAME_ALIAS=registry.cn-beijing.aliyuncs.com/showmethemoney/damobase
 GIT_TAG := $(shell git describe --abbrev=0 --tags 2>/dev/null || echo 0.0.0)
 GIT_COMMIT_SEQ := $(shell git rev-parse --short HEAD)
 GIT_COMMIT_CNT := $(shell git rev-list --all --count)
 VERSION := $(GIT_TAG)-$(GIT_COMMIT_CNT)-$(GIT_COMMIT_SEQ)
 FULL_VERSION := $(BIN_NAME):$(VERSION)
+FULL_VERSION_ALIAS := $(BIN_NAME_ALIAS):$(VERSION)
 
 default: test
 
@@ -26,10 +28,10 @@ docker-save:
 	docker save $(FULL_VERSION) > $(VERSION).tar
 
 docker-build:
-	docker build . -t $(FULL_VERSION) && docker tag $(FULL_VERSION) $(BIN_NAME):latest
+	docker build . -t $(FULL_VERSION) && docker tag $(FULL_VERSION) $(BIN_NAME):latest && docker tag $(FULL_VERSION) $(BIN_NAME_ALIAS):latest && docker tag $(FULL_VERSION) $(BIN_NAME_ALIAS):$(VERSION)
 
 docker-push:
-	docker push $(FULL_VERSION) && docker push $(BIN_NAME):latest
+	docker push $(FULL_VERSION_ALIAS) && docker push $(BIN_NAME_ALIAS):latest
 
 docker: docker-build docker-save docker-push
 
