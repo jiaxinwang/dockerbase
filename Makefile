@@ -31,7 +31,13 @@ docker-build:
 	docker build . -t $(FULL_VERSION) && docker tag $(FULL_VERSION) $(BIN_NAME):latest && docker tag $(FULL_VERSION) $(BIN_NAME_ALIAS):latest && docker tag $(FULL_VERSION) $(BIN_NAME_ALIAS):$(VERSION)
 
 docker-push:
-	docker push $(FULL_VERSION_ALIAS) && docker push $(BIN_NAME_ALIAS):latest
+	docker push $(FULL_VERSION_ALIAS) && docker push $(BIN_NAME):latest
+
+docker-pull:
+	docker pull $(FULL_VERSION_ALIAS) && docker push $(BIN_NAME):latest
+
+docker-test:
+	docker run --rmit $(FULL_VERSION_ALIAS) bash
 
 docker: docker-build docker-save docker-push
 
