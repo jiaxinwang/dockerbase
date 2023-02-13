@@ -39,10 +39,10 @@ docker-pull:
 test: test-gpu
 
 test-gpu:
-	docker run --rm --gpus all -it $(BIN_NAME_ALIAS):latest bash
+	docker run --rm -v ./:/app --gpus all -it $(BIN_NAME_ALIAS):latest bash
 
 test-cpu:
-	docker run --rm -it $(BIN_NAME_ALIAS):latest bash
+	docker run --rm -v ./:/app -it $(BIN_NAME_ALIAS):latest bash
 
 
 docker: docker-build docker-save docker-push
